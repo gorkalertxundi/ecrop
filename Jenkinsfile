@@ -30,7 +30,7 @@ pipeline {
                     withSonarQubeEnv(installationName:'SonarQube', credentialsId: 'sonar-token') {
                         withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
                                             sh 'mvn sonar:sonar \
-                                                -Dsonar.host.url=https://sonarsolaris.ddns.net \
+                                                -Dsonar.host.url=https://scannerecrop.ddns.net \
                                                 -Dsonar.login=${SONAR_TOKEN} \
                                                 -Dsonar.sources=src/main/resources,src/main/java \
                                                 -Dsonar.tests=src/test \

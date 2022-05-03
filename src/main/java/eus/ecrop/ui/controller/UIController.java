@@ -8,7 +8,7 @@ public class UIController {
     
     @GetMapping("/login")
     public String login() {
-        return "<h1>h33h33</h1>";
+        return "login";
     }
 
 }

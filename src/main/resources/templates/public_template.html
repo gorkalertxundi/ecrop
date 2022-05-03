@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script th:src="@{/js/main.js}"></script>
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">eCrop</title>
+</head>
+
+<body>
+    <header>
+        <div class="header-wrap">
+            <ul class="main-menu">
+                <li class="menu-item"><a href="/" th:href="@{/}">Home</a></li>
+                <li class="menu-item"><a href="/map" th:href="@{/map}">Map</a></li>
+            </ul>
+            <a href="/login" th:href="@{/login}" class="login-link">Login</a>
+        </div>
+    </header>
+    <main layout:fragment="content">
+        <p>Changing contents</p>
+    </main>
+</body>

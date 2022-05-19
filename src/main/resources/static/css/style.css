@@ -130,9 +130,13 @@ aside.toggled .menu-item-wrap .menu-text {
     border: 2px solid var(--highlight-secondary);
 }
 
-.profile a {
-    display: block;
+.profile.logged {
+    border-color: var(--highlight-main);
+}
+
+.profile .profile-button {
     line-height: 0;
+    cursor: pointer;
 }
 
 .profile .profile-icon {

@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 */
 
 @Controller
-public class LoginController {
+public class IndexController {
     
-    @GetMapping("/login")
-    public String login() {
-        return "page/login";
+    @GetMapping("/")
+    public String index() {
+        return "/page/index";
     }
 
 }

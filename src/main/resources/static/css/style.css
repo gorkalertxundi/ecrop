@@ -14,13 +14,15 @@ a {
 }
 
 .container,
-.aside-wrap {
+.aside-wrap,
+#viewport {
     display: flex;
     height: 100%;
 }
 
 main {
     width: 100%;
+    position: relative;
 }
 
 aside {
@@ -39,7 +41,7 @@ aside .menu-item-wrap {
     transition: all 0.25s ease-in-out;
 }
 
-aside.toggled a.menu-item-wrap:hover {
+aside.toggled a.menu-item-wrap.item-has-text:hover {
     background: lightgray;
     border-radius: 8px;
 }
@@ -49,10 +51,9 @@ aside .menu-item-wrap .menu-icon {
     fill: var(--highlight-main);
     outline: var(--highlight-main);
     padding: 0.4em;
-    border-radius: 50%;
     width: 24px;
     height: 24px;
-
+    border-radius: 50%;
 }
 
 aside .menu-item-wrap .menu-icon,
@@ -65,14 +66,26 @@ aside .menu-item-wrap:hover .menu-icon {
     outline: var(--highlight-secondary);
 }
 
-aside:not(.toggled) .menu-item-wrap:hover .menu-icon {
+aside .menu-item-wrap:hover .menu-icon {
     background: lightgray;
 }
 
+aside.toggled .menu-item-wrap.item-has-text:hover .menu-icon {
+    background: none;
+}
+
 aside .menu-item-wrap .menu-text {
-    display: none;
     color: var(--highlight-main);
+    max-width: 0;
+    transition: all 0.25s ease-in-out;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0;
+}
+
+aside.toggled .menu-item-wrap .menu-text {
     padding: 0.2em 0.8em;
+    max-width: 100%;
 }
 
 aside .menu-item-wrap:hover .menu-text {
@@ -106,15 +119,71 @@ aside.toggled .menu-item-wrap .menu-text {
     margin-top: auto;
 }
 
+.profile {
+    z-index: 100;
+    position: absolute;
+    top: 2em;
+    right: 2em;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: var(--bg-light);
+    border: 2px solid var(--highlight-secondary);
+}
+
+.profile a {
+    display: block;
+    line-height: 0;
+}
+
 .profile .profile-icon {
     width: 64px;
     height: 64px;
-    border: 2px solid var(--color-b);
-    border-radius: 50%;
+}
+
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu-header .logo {
+    display: none;
+    padding: 0 0.4em;
+}
+
+.menu-header .logo svg {
+    width: 3em;
+}
+
+aside.toggled .menu-header .logo {
+    display: block;
+}
+
+/* Logo 🗿 */
+.logo svg .cls-1 {
+    fill: #fabe17;
+}
+
+.logo svg .cls-2 {
+    fill: #97ba3d;
+}
+
+/* View Loader */
+.view-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: green;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Tooltip 🔥 */
 aside:not(.toggled) .menu-item-wrap .menu-icon::before {
+    z-index: 10;
     content: attr(data-tip);
     font-size: 14px;
     position: absolute;
@@ -136,6 +205,7 @@ aside:not(.toggled) .menu-item-wrap .menu-icon::before {
 }
 
 aside:not(.toggled) .menu-item-wrap .menu-icon::after {
+    z-index: 10;
     width: 0;
     height: 0;
     border-style: solid;
@@ -165,4 +235,8 @@ aside:not(.toggled) .menu-item-wrap .menu-icon::after {
     right: -8px;
     top: 50%;
     transform: translate(0, -50%);
+}
+
+.hidden {
+    display: none;
 }

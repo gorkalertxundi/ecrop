@@ -178,7 +178,7 @@ aside.toggled .menu-header .logo {
     left: 0;
     width: 100%;
     height: 100%;
-    background: green;
+    background: #fff;
     z-index: 9999;
     display: flex;
     justify-content: center;

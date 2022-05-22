@@ -6,7 +6,6 @@ function initMap() {
         zoom: 15,
         zoomControl: true,
         streetViewControl: false,
-        mapTypeControl: false,
         mapTypeId: 'satellite'
     }
     map = new google.maps.Map(document.querySelector(".map-frame"), args);
@@ -14,7 +13,10 @@ function initMap() {
 
     const imageMapType = new google.maps.ImageMapType({
         getTileUrl: function (coord, zoom) {
-            return "https://mts0.google.com/vt/lyrs=s&hl=en&x=" + coord.x + "&y=" + coord.y + "&z=" + zoom;
+            // "https://mts0.google.com/vt/lyrs=s&hl=en&x=" + coord.x + "&y=" + coord.y + "&z=" + zoom;
+            let x = coord.x / (2 ** zoom);
+            let y = coord.y / (2 ** zoom);
+            return `https://node.ecrop.ddns.net/process-image?api-key=uwu&center=${x},${y}`;
         }
     });
 

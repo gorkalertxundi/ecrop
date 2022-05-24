@@ -11,11 +11,7 @@ El principal producto ofrecido y el cual es va a utilizar por una gran cantidad 
 - Aumentar la productividad de las tierras de cultivo en un 10 % para 2024
 
 ## Alineación e implementación con los ODSs
-[![SDG02](https://raw.githubusercontent.com/Aurora-Network-Global/sdg-queries/master/images/sdg-icons/E_SDG_goals_icons-individual-rgb-02.png)](https://sdgs.un.org/es/goals/goal2) 
-
-[![SDG12](https://raw.githubusercontent.com/Aurora-Network-Global/sdg-queries/master/images/sdg-icons/E_SDG_goals_icons-individual-rgb-12.png)](https://sdgs.un.org/es/goals/goal12)
-
-[![SDG15](https://raw.githubusercontent.com/Aurora-Network-Global/sdg-queries/master/images/sdg-icons/E_SDG_goals_icons-individual-rgb-15.png)](https://sdgs.un.org/es/goals/goal15)
+[![SDG02](https://raw.githubusercontent.com/Aurora-Network-Global/sdg-queries/master/images/sdg-icons/E_SDG_goals_icons-individual-rgb-02.png)](https://sdgs.un.org/es/goals/goal2) [![SDG12](https://raw.githubusercontent.com/Aurora-Network-Global/sdg-queries/master/images/sdg-icons/E_SDG_goals_icons-individual-rgb-12.png)](https://sdgs.un.org/es/goals/goal12) [![SDG15](https://raw.githubusercontent.com/Aurora-Network-Global/sdg-queries/master/images/sdg-icons/E_SDG_goals_icons-individual-rgb-15.png)](https://sdgs.un.org/es/goals/goal15)
 
 ## Clientes potenciales
 Por un lado, dentro del ámbito particular habría usuarios con experiencia en el sector agrícola. Sin embargo, también hay que tener en cuenta a los usuarios sin experiencia alguna dentro de dicho sector. Es por este motivo  que este tipo de usuario tendría que disponer de la información necesaria de una manera clara y concisa, mientras que los profesionales del ámbito demandaría la inmediatez a la hora de obtener la información, así como la obtención de información de calidad para aportar valor.

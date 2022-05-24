@@ -4,7 +4,7 @@
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/gorkalertxundi/ecrop)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/gorkalertxundi/ecrop)
 
-El principal producto ofrecido y el cual es va a utilizar por una gran cantidad de usuarios sera el portal web. Sin embargo, otras herramientas como el modelo de IA utilizado son servicios a tener en cuenta.
+El principal producto ofrecido es el portal web. Sin embargo, otras herramientas como el acceso al modelo de IA mediante API son servicios a tener en cuenta.
 
 ## Objetivos
 - Fomentar y aumentar el uso de las tierras sin explotar para el uso agrícola en un 20 % para 2026.

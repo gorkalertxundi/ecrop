@@ -1,4 +1,4 @@
-# eCrop
+# eCrop - Una herramienta para potenciar el sector agrícola con ayuda de inteligencia artificial
 ![Sonar Coverage](https://img.shields.io/sonar/coverage/eus.ecrop:ecrop?server=https%3A%2F%2Fscannerecrop.ddns.net&sonarVersion=9.1)
 ![Website](https://img.shields.io/website?url=https%3A%2F%2Fwww.ecrop.ddns.net)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/gorkalertxundi/ecrop)

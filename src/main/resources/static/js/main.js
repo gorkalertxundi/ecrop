@@ -37,6 +37,7 @@ const switchViewport = async view => {
 const clearInjected = () => {
     document.querySelectorAll('.injected').forEach(i => i.remove());
     document.querySelectorAll('*[src*="https://maps.googleapis.com"]').forEach(i => i.remove());
+    if(window.google) window.google = {};
 };
 
 const injectScript = doc => {

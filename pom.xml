@@ -12,6 +12,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>eCropUI</name>
 	<description>eCrop Web Interface</description>
+	<packaging>war</packaging>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

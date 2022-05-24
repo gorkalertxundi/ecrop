@@ -19,3 +19,12 @@ Por un lado, dentro del ámbito particular tenemos usuarios con experiencia en e
 Por otro lado, dentro de las organizaciones (públicas o privadas) la demanda principal es ofrecer un buen servicio. Para estas organizaciones el tiempo necesario invertido es realmente valioso, además de necesitar unas garantías y un estándar de calidad. Algunas de las utilidades que tiene esta herramienta para este tipo de organizaciones es la de aumentar su número de tierras públicas o privadas, sacar el mayor potencial a las tierras que ya tienen en propiedad o comenzar a explotarlas, obtener información relevante sobre el tipo de tierras a la hora de la toma de decisiones para la planificación de la obra pública, etc.
 
 Entre estos dos grupos de clientes es importante destacar unas claras diferencias y características únicas. Por una parte, la cantidad de dinero que un particular puede llegar a desembolsar es ínfima si es comparada con la de una organización. Por este motivo, la cuota para convertirse en un usuario Premium debe ser asequible. Por otra parte, las organizaciones pueden llegar a desembolsar una cantidad de dinero mayor, pero siempre requieren de un servicio pos-venta rápido y eficaz. Por este motivo, estos apartados deben quedar bien cerrados en el Acuerdo de Nivel de Servicio (ANS).
+
+## Colaboradores
+<ul>
+<li><a href="https://github.com/gorkalertxundi">gorkalertxundi</a></li>
+<li><a href="https://github.com/Orobe">Orobe</a></li>
+<li><a href="https://github.com/IgorLopezSalazar">IgorLopezSalazar</a></li>
+<li><a href="https://github.com/alejandrocalleja">alejandrocalleja</a></li>
+<li><a href="https://github.com/UrkoAT">UrkoAT</a></li>
+</ul>

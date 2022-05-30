@@ -1,10 +1,10 @@
 spring:
   thymeleaf:
-    cache: true
+    cache: false
     prefix: classpath:/templates/
     suffix: .html
     
 server:
-  port: 9103
+  port: 80
   api:
-    url: https://api.ecrop.ddns.net/
+    url: http://localhost:8080/

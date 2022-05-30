@@ -3,10 +3,12 @@ var overlay;
 
 function initMap() {
     const args = {
-        center: { lat: 48.714728, lng: -79.998672 },
+        center: { lat: 43.062840, lng: -2.493579 },
         zoom: 15,
         zoomControl: false,
         scrollwheel: false,
+        disableDoubleClickZoom: true,
+        fullscreenControl: false,
         streetViewControl: false,
         mapTypeControl: false,
         mapTypeId: 'satellite',
@@ -15,16 +17,12 @@ function initMap() {
 
     overlay = new google.maps.ImageMapType({
         getTileUrl: function (tileCoord, zoom) {
-            let bounds = MERCATOR.getTileBounds({ x: tileCoord.x, y: tileCoord.y, z: zoom });
-            let lat = bounds.ne.lat + (bounds.ne.lat - bounds.sw.lat) / 2
-            let lng = bounds.ne.lng + (bounds.ne.lng - bounds.sw.lng) / 2
-            console.log(lat, lng);
+            let bounds = MERCATOR.getTileBounds({ x: tileCoord.x - 1, y: tileCoord.y + 1, z: zoom });
+            let lat = bounds.ne.lat + (bounds.ne.lat - bounds.sw.lat) / 2;
+            let lng = bounds.ne.lng + (bounds.ne.lng - bounds.sw.lng) / 2;
 
             return `https://node.ecrop.ddns.net/process-image?api-key=uwu&center=${lat},${lng}`;
         },
-        // getOpacity: function () {
-        //     return 0.1;
-        // }
     });
 
     overlay.setOpacity(0.6);

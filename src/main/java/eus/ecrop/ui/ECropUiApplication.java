@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ECropUIApplication {
+public class ECropUiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ECropUIApplication.class, args);
+		SpringApplication.run(ECropUiApplication.class, args);
 	}
 
 }

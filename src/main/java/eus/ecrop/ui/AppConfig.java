@@ -7,6 +7,11 @@ import org.springframework.stereotype.Component;
 
 import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
 
+/*
+* @author Mikel Orobengoa
+* @version 31/05/2022
+*/
+
 @Component
 @Configuration
 @ConfigurationProperties

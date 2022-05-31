@@ -1,0 +1,15 @@
+.login-form {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+}
+
+.login-form .google {
+    display: flex;
+    gap: 1em;
+    padding: 1em 2em;
+    color: darkgray;
+    border-radius: 4px;
+    box-shadow: 0px 2px 6px 0px #0005;
+}

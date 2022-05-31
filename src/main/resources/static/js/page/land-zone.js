@@ -74,5 +74,5 @@ function createNutrient(title, value) {
 }
 
 function showPagination() {
-    
+    console.error('showPagination');
 }

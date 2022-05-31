@@ -26,7 +26,6 @@ function initMap() {
     });
 
     overlay.setOpacity(0.6);
-    // map.overlayMapTypes.push(overlay);
     map.overlayMapTypes.setAt(0, overlay);
 }
 
@@ -54,7 +53,7 @@ async function fetchImg() {
 
 }
 
-MERCATOR = {
+var MERCATOR = {
     fromLatLngToPoint: function (latLng) {
         var siny = Math.min(Math.max(Math.sin(latLng.lat * (Math.PI / 180)),
             -.9999),

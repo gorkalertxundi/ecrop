@@ -27,8 +27,8 @@ pipeline {
         stage('Static Analysis') {
             steps {
                 withMaven(maven: 'M3') {
-                    withSonarQubeEnv(installationName:'SonarQube', credentialsId: 'sonar-token') {
-                        withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+                    withSonarQubeEnv(installationName:'SonarQube', credentialsId: 'sonar-ecrop-token') {
+                        withCredentials([string(credentialsId: 'sonar-ecrop-token', variable: 'SONAR_TOKEN')]) {
                                             sh 'mvn sonar:sonar \
                                                 -Dsonar.host.url=https://scannerecrop.ddns.net \
                                                 -Dsonar.login=${SONAR_TOKEN} \
@@ -44,7 +44,7 @@ pipeline {
         stage('QualityGate') {
             steps {
                 timeout(time: 5, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true, credentialsId: 'sonar-token'
+                    waitForQualityGate abortPipeline: true, credentialsId: 'sonar-ecrop-token'
                 }
             }
         }
@@ -55,7 +55,7 @@ pipeline {
             steps {
                 echo '----- Deploy app -----'
                 withMaven (maven: 'M3') {
-                    withCredentials([]) {
+                    withCredentials([string(credentialsId: 'jasypt-secret', variable: 'JASYPT')]) {
                         sh 'mvn -Dmaven.test.skip package'
                     }
                 }

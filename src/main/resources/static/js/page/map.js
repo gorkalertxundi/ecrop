@@ -2,6 +2,7 @@ var map;
 var overlay;
 
 function initMap() {
+
     const args = {
         center: { lat: 43.062840, lng: -2.493579 },
         zoom: 15,
@@ -12,6 +13,7 @@ function initMap() {
         streetViewControl: false,
         mapTypeControl: false,
         mapTypeId: 'satellite',
+        scaleControl: false,
     }
     map = new google.maps.Map(document.querySelector(".map-frame"), args);
 

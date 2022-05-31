@@ -6,13 +6,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /*
 * @author Mikel Orobengoa
-* @version 10/05/2022
+* @version 31/05/2022
 */
 
+/**
+ * It's a controller that returns the viewport modules.
+ */
 @Controller
 @RequestMapping("/view")
 public class ViewportController {
-    
+
     @GetMapping("/login")
     public String login() {
         return "page/login";

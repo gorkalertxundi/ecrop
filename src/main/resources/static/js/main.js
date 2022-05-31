@@ -1,5 +1,3 @@
-const API_URL = 'http://localhost:8080';
-
 let currentView = 'index';
 
 document.addEventListener('DOMContentLoaded', () => {

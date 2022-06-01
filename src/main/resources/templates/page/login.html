@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/page/login.css}">
+</head>
+
+<body>
+    <div id="viewport" layout:fragment="content">
+        <div class="login-form">
+            <a href="http://localhost:8080/oauth2/authorization/google" class="google"><img src="/img/google.svg"
+                    th:src="@{/img/google.svg}" /><span>Sign in with Google</span></a>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -16,7 +16,7 @@ const getCookie = name => {
     if (match) return match[2];
 }
 
-const refresh_token = async () => {
+const refreshToken = async () => {
     const refresh_token = getCookie(REFRESH_TOKEN_COOKIE);
     if (!refresh_token) {
         logout();

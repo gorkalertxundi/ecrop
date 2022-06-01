@@ -6,6 +6,7 @@ body {
     --highlight-main: #95b83c;
     --highlight-secondary: #7d5a42;
     --bg-light: #f2f0ec;
+    
 }
 
 a {
@@ -64,9 +65,6 @@ aside .menu-item-wrap .menu-text {
 aside .menu-item-wrap:hover .menu-icon {
     fill: var(--highlight-secondary);
     outline: var(--highlight-secondary);
-}
-
-aside .menu-item-wrap:hover .menu-icon {
     background: lightgray;
 }
 
@@ -84,16 +82,13 @@ aside .menu-item-wrap .menu-text {
 }
 
 aside.toggled .menu-item-wrap .menu-text {
+    display: block;
     padding: 0.2em 0.8em;
     max-width: 100%;
 }
 
 aside .menu-item-wrap:hover .menu-text {
     color: var(--highlight-secondary);
-}
-
-aside.toggled .menu-item-wrap .menu-text {
-    display: block;
 }
 
 .aside-wrap {
@@ -206,6 +201,11 @@ aside:not(.toggled) .menu-item-wrap .menu-icon::before {
     font-family: sans-serif;
     letter-spacing: 0;
     font-weight: 600;
+    right: 0;
+    top: 50%;
+    transform: translate(calc(100% + 8px), -50%);
+    box-sizing: border-box;
+    border-radius: 3px;
 }
 
 aside:not(.toggled) .menu-item-wrap .menu-icon::after {
@@ -218,27 +218,17 @@ aside:not(.toggled) .menu-item-wrap .menu-icon::after {
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease-in-out;
+    border-width: 8px 8px 8px 0;
+    border-color: transparent rgba(10, 20, 30, 0.85) transparent transparent;
+    right: -8px;
+    top: 50%;
+    transform: translate(0, -50%);
 }
 
 aside:not(.toggled) .menu-item-wrap:hover .menu-icon::before,
 aside:not(.toggled) .menu-item-wrap:hover .menu-icon::after {
     visibility: visible;
     opacity: 1;
-}
-
-aside:not(.toggled) .menu-item-wrap .menu-icon::before {
-    right: 0;
-    top: 50%;
-    transform: translate(calc(100% + 8px), -50%);
-    box-sizing: border-box;
-    border-radius: 3px;
-}
-aside:not(.toggled) .menu-item-wrap .menu-icon::after {
-    border-width: 8px 8px 8px 0;
-    border-color: transparent rgba(10, 20, 30, 0.85) transparent transparent;
-    right: -8px;
-    top: 50%;
-    transform: translate(0, -50%);
 }
 
 .hidden {

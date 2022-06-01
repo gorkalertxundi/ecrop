@@ -1,0 +1,11 @@
+.logo-big {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-content: center;
+}
+
+.logo-big svg {
+    max-width: 30em;
+    width: 100%;
+}

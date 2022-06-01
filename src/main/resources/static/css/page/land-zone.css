@@ -1,0 +1,50 @@
+.land-zone {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#land-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 2em;
+    gap: 2em;
+    box-sizing: border-box;
+    flex-grow: 1;
+}
+
+#land-list .land {
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    background-color: var(--bg-light);
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+#land-list .land .title {
+    padding: 1em;
+    background-color: var(--highlight-main);
+}
+
+#land-list .land .data {
+    display: flex;
+    margin: 1em 2em;
+}
+
+#land-list .land .data .nutrients {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 1em;
+}
+
+#land-list .land .data .nutrients ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#land-list .land .data .nutrients ul li .tag {
+    font-weight: bold;
+}

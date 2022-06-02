@@ -6,7 +6,6 @@ body {
     --highlight-main: #95b83c;
     --highlight-secondary: #7d5a42;
     --bg-light: #f2f0ec;
-    
 }
 
 a {
@@ -14,11 +13,35 @@ a {
     font-weight: 500;
 }
 
+input[type="submit"],
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    background-color: var(--highlight-main);
+    border-radius: 8px;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    width: fit-content;
+    color: #fff;
+    font-weight: bold;
+}
+
+input[type="submit"]:hover,
+.btn:hover {
+    background-color: var(--highlight-secondary);
+}
+
 .container,
 .aside-wrap,
 #viewport {
     display: flex;
     height: 100%;
+}
+
+#viewport {
+    overflow: auto;
 }
 
 main {
@@ -233,4 +256,26 @@ aside:not(.toggled) .menu-item-wrap:hover .menu-icon::after {
 
 .hidden {
     display: none;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+.pagination .page {
+    display: grid;
+    place-items: center;
+    padding: 1em;
+    background: var(--highlight-main);
+    color: #fff;
+    border-radius: 8px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.pagination .page.active {
+    background: var(--highlight-secondary);
 }

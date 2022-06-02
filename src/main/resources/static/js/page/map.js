@@ -4,7 +4,10 @@ var overlay;
 function initMap() {
 
     const args = {
-        center: { lat: 43.062840, lng: -2.493579 },
+        // center: { lat: 43.062840, lng: -2.493579 }, //Mondra
+        // center: { lat: 43.306613, lng: -2.386335 }, //Mutr
+        // center: { lat: 43.3067104, lng: -2.68408302 }, //Gern
+        center: { lat: 40.7659477020942, lng: -111.96443036083478 }, //Salt City
         zoom: 15,
         zoomControl: false,
         scrollwheel: false,

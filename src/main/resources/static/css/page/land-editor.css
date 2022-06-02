@@ -1,0 +1,96 @@
+#land-editor {
+    display: grid;
+    position: absolute;
+    place-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fffa;
+}
+
+#land-editor.hidden {
+    display: none;
+}
+
+#land-editor .land-editor-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.85);
+}
+
+#land-editor .land-editor-wrap {
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    background-color: var(--bg-light);
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 1em;
+    max-width: 40em;
+}
+
+#land-editor .editor-container .header {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+    margin-bottom: 1.5em;
+    justify-content: space-between;
+}
+
+#land-editor .editor-container .header h2 {
+    margin: 0;
+}
+
+#land-editor .editor-container .header .close-editor {
+    color: red;
+    cursor: pointer;
+}
+
+#land-editor .form .form-upper {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+#land-editor .form .form-lower {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1em;
+    margin-top: 1em;
+}
+
+#land-editor .form .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+}
+
+#land-editor .form input[type="text"],
+#land-editor .form input[type="number"] {
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 0.2em;
+}
+
+#land-editor .form .form-field label,
+#land-editor .form .form-field input {
+    font-size: 1.2em;
+}
+
+#land-editor .form .form-field input {
+    width: 10ch;
+}
+
+#land-editor .form input[type="submit"] {
+    border: none;
+    cursor: pointer;
+}
+
+#land-editor .form input[name="name"] {
+    width: 30ch;
+    max-width: 100%;
+}

@@ -43,7 +43,7 @@ const updateUrl = view => {
 }
 
 const updateTitle = doc => {
-    document.title = `eCrop - ${doc.querySelector('title').innerHTML}`;
+    document.title = `${doc.querySelector('title').innerHTML} - eCrop`;
 
 }
 
@@ -78,15 +78,19 @@ const clearViewLoading = () => {
     document.querySelector('.view-loader').classList.add('hidden');
 }
 
-const apiRequest = async (path, method, successCallback, errorCallback) => {
-    const req = await fetch(`${API_URL}${path}`, {
+const apiRequest = async (path, method, successCallback, errorCallback, data) => {
+    console.log('body: ', JSON.stringify(data));
+    console.log(`request path: ${API_URL}${path}`);
+    const  req = await fetch(`${API_URL}${path}`, {
         mode: 'cors',
         method: method,
         headers: {
             'Content-Type': 'application/json',
             authorization: `Bearer ${getCookie('access_token')}`,
-        }
+        },
+        body: data
     });
+    console.log('response: ', req);
     if (req.status == 401) {
         refreshToken();
         console.error('refreshed token, falta refetchear');

@@ -2,16 +2,18 @@ var current_page = 0;
 loadLands();
 
 async function loadLands(page = 0) {
-    console.log('loadLands');
-    await apiRequest(`/land/current/all?page=${page}`, 'GET', showLands, null);
+    console.log('loadLands', page);
+    await apiRequest(`land/current/all?page=${page}&size=4`, 'GET', showLands, null);
 }
 
 function showLands(response) {
     const landList = document.querySelector('#land-list');
+    landList.innerHTML = '';
     response.content.forEach(land => {
         console.log(land)
         landList.appendChild(createLandItem(land));
     });
+    showPagination(response);
 }
 
 function createLandItem(land) {
@@ -19,23 +21,31 @@ function createLandItem(land) {
     landElement.dataset.landId = land.id;
     landElement.classList.add('land');
 
+    landElement.appendChild(createTitleBar(land));
+    landElement.appendChild(createData(land));
+    landElement.appendChild(createActionButtons());
+
+
+    return landElement;
+}
+
+function createTitleBar(land) {
     const titleBar = document.createElement('div');
     titleBar.classList.add('title');
-    landElement.appendChild(titleBar);
 
     const name = document.createElement('h2');
     name.innerHTML = land.name;
     titleBar.appendChild(name);
+    return titleBar;
+}
 
-
+function createData(land) {
     const data = document.createElement('div');
     data.classList.add('data');
-    landElement.appendChild(data);
 
     const nutrients = document.createElement('div');
-    nutrients.classList.add('nutrients');
+    nutrients.classList.add('nutrients', 'data-container');
     data.appendChild(nutrients);
-
 
     const nutrientsTitle = document.createElement('h3');
     nutrientsTitle.innerHTML = 'Nutrients';
@@ -43,22 +53,51 @@ function createLandItem(land) {
     nutrients.appendChild(createNutrientList(land));
 
     const recommendations = document.createElement('div');
-    recommendations.classList.add('recommendations');
-    recommendations.innerHTML = '';
+    recommendations.classList.add('recommendations', 'data-container');
     data.appendChild(recommendations);
 
-    return landElement;
+    const recommendationsTitle = document.createElement('h3');
+    recommendationsTitle.innerHTML = 'Recommendations';
+    recommendations.appendChild(recommendationsTitle);
+    recommendations.appendChild(createRecommendationList(land));
+
+    return data;
+}
+
+function createActionButtons() {
+    const buttons = document.createElement('div');
+    buttons.classList.add('action-buttons');
+    buttons.appendChild(createDeleteButton());
+    buttons.appendChild(createUpdateButton());
+    return buttons;
+}
+
+function createUpdateButton() {
+    const button = document.createElement('a');
+    button.classList.add('edit-land', 'btn');
+    button.innerHTML = 'Update nutrients';
+    button.addEventListener('click', openLandEditor);
+    return button;
+}
+
+function createDeleteButton() {
+    const button = document.createElement('a');
+    button.classList.add('delete-land', 'btn');
+    button.innerHTML = 'Delete';
+    button.addEventListener('click', deleteLand);
+    return button;
 }
 
 function createNutrientList(land) {
     const list = document.createElement('ul');
 
-    list.appendChild(createNutrient('N', land.nitrogen));
-    list.appendChild(createNutrient('P', land.phosphorus));
-    list.appendChild(createNutrient('K', land.potassium));
-    list.appendChild(createNutrient('pH', land.ph));
-    list.appendChild(createNutrient('T', land.temperature));
-    list.appendChild(createNutrient('H', land.humidity));
+    list.appendChild(createNutrient('N:', land.nitrogen));
+    list.appendChild(createNutrient('P:', land.phosphorus));
+    list.appendChild(createNutrient('K:', land.potassium));
+    list.appendChild(createNutrient('pH:', land.ph));
+    list.appendChild(createNutrient('T:', land.temperature));
+    list.appendChild(createNutrient('H:', land.humidity));
+    list.appendChild(createNutrient('R:', land.rainfall));
 
     return list;
 }
@@ -69,10 +108,68 @@ function createNutrient(title, value) {
     nutrientTitle.innerHTML = title;
     nutrientTitle.classList.add('tag');
     nutrient.appendChild(nutrientTitle);
-    nutrient.innerHTML += `: ${value}`;
+    nutrient.innerHTML += ` ${value ? value : '-'}`;
     return nutrient;
 }
 
-function showPagination() {
-    console.error('showPagination');
+function createRecommendationList(land) {
+    const list = document.createElement('ul');
+    return list;
+}
+
+function createRecommendation(title, value) {
+    const recommendation = document.createElement('li');
+    const recommendationTitle = document.createElement('span');
+    recommendationTitle.innerHTML = title;
+    recommendationTitle.classList.add('tag');
+    recommendation.appendChild(recommendationTitle);
+    recommendation.innerHTML += value ? ` ${value}` : '-';
+    return recommendation;
+}
+
+function deleteLand(e) {
+    if (!e) return;
+    e.preventDefault();
+
+    const id = e.target.parentElement.dataset.landId;
+    apiRequest(`land/${id}`, 'DELETE', loadLands);
+}
+
+function showPagination(response) {
+    const pagination = document.querySelector('.pagination');
+    pagination.innerHTML = '';
+    console.log(response);
+
+    if (response.totalPages > 1) {
+        if (!response.first) {
+            const previous = document.createElement('a');
+            previous.innerHTML = '<';
+            previous.classList.add('page');
+            previous.addEventListener('click', () => {
+                loadLands(0);
+            });
+            pagination.appendChild(previous);
+        }
+
+        for (let i = 0; i < response.totalPages; i++) {
+            const page = document.createElement('a');
+            page.innerHTML = i + 1;
+            page.classList.add('page', 'page-numeric');
+            if (i === response.pageable.pageNumber)
+                page.classList.add('active');
+            else page.addEventListener('click', () => loadLands(page.dataset.page));
+            page.dataset.page = i;
+            pagination.appendChild(page);
+        }
+
+        if (!response.last) {
+            const next = document.createElement('a');
+            next.innerHTML = '>';
+            next.classList.add('page');
+            next.addEventListener('click', () => {
+                loadLands(response.totalPages - 1);
+            });
+            pagination.appendChild(next);
+        }
+    }
 }

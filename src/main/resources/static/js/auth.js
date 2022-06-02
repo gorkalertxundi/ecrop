@@ -57,6 +57,7 @@ const logout = () => {
     document.cookie = "refresh_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "JSESSIONID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     enableLogin();
+    window.location.href = '/';
 }
 
 const checkLoggedIn = () => {

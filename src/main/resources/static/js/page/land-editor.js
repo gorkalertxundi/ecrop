@@ -140,16 +140,29 @@ async function submitLand(e) {
     e.preventDefault();
     const form = e.target;
     const data = new FormData(form);
-    await apiRequest(form.dataset.url, form.dataset.method, landEditedSuccessfully, landEditedError, JSON.stringify(Object.fromEntries(data)));
+    if (form.dataset.method === 'PUT')
+        await apiRequest(form.dataset.url, form.dataset.method, landEditedSuccessfully, landEditedError, JSON.stringify(Object.fromEntries(data)));
+    else await apiRequest(form.dataset.url, form.dataset.method, landCreatedSuccessfully, landCreatedError, JSON.stringify(Object.fromEntries(data)));
 }
 
 function landEditedSuccessfully() {
     closeEditor();
-    console.error('land edited successfully');
+    loadLands(current_page);
+    createAlert({ type: 'success', title: 'Land edited successfully!', message: 'The land has been edited successfully' });
 }
 
 function landEditedError() {
-    console.error('land edited error');
+    createAlert({ type: 'success', title: 'Could not update land!', message: 'There was an error updating the land information.' });
+}
+
+function landCreatedSuccessfully() {
+    closeEditor();
+    loadLands(0);
+    createAlert({ type: 'success', title: 'Land created successfully!', message: 'The land has been created successfully' });
+}
+
+function landCreatedError() {
+    createAlert({ type: 'success', title: 'Could not create land!', message: 'There was an error creating the land.' });
 }
 
 function closeEditor(e) {

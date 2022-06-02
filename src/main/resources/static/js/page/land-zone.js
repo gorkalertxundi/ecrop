@@ -131,8 +131,8 @@ function deleteLand(e) {
     if (!e) return;
     e.preventDefault();
 
-    const id = e.target.parentElement.dataset.landId;
-    apiRequest(`land/${id}`, 'DELETE', loadLands);
+    const id = e.target.parentElement.parentElement.dataset.landId;
+    apiRequest(`land/delete?id=${id}`, 'DELETE', deleteSuccessfull, deleteError);
 }
 
 function showPagination(response) {
@@ -157,7 +157,10 @@ function showPagination(response) {
             page.classList.add('page', 'page-numeric');
             if (i === response.pageable.pageNumber)
                 page.classList.add('active');
-            else page.addEventListener('click', () => loadLands(page.dataset.page));
+            else page.addEventListener('click', () => {
+                loadLands(page.dataset.page);
+                current_page = page.dataset.page;
+            });
             page.dataset.page = i;
             pagination.appendChild(page);
         }
@@ -172,4 +175,13 @@ function showPagination(response) {
             pagination.appendChild(next);
         }
     }
+}
+
+function deleteSuccessfull(response) {
+    loadLands(current_page);
+    createAlert({type: 'success', title: 'Land deleted successfully!', message: 'The land has been deleted'});
+}
+
+function deleteError(response) {
+    createAlert({type: 'error', title: 'Error deleting land!', message: 'There was an error deleting the land'});
 }

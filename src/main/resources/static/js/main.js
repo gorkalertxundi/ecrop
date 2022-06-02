@@ -79,9 +79,8 @@ const clearViewLoading = () => {
 }
 
 const apiRequest = async (path, method, successCallback, errorCallback, data) => {
-    console.log('body: ', JSON.stringify(data));
     console.log(`request path: ${API_URL}${path}`);
-    const  req = await fetch(`${API_URL}${path}`, {
+    const req = await fetch(`${API_URL}${path}`, {
         mode: 'cors',
         method: method,
         headers: {
@@ -90,13 +89,37 @@ const apiRequest = async (path, method, successCallback, errorCallback, data) =>
         },
         body: data
     });
-    console.log('response: ', req);
     if (req.status == 401) {
         refreshToken();
         console.error('refreshed token, falta refetchear');
     }
+
+    const contentType = req.headers.get('Content-Type');
     if (req.status >= 200 && req.status < 300) {
-        if (typeof successCallback === 'function') successCallback(await req.json());
+        if (typeof successCallback === 'function')
+            if (contentType && contentType.indexOf('application/json') !== -1)
+                successCallback(await req.json());
+            else successCallback(await req.text());
     }
-    else if (typeof errorCallback === 'function') errorCallback(await req.json());
+    else if (typeof errorCallback === 'function')
+        if (contentType && contentType.indexOf('application/json') !== -1)
+            errorCallback(await req.json());
+        else errorCallback(await req.text());
+}
+
+const createAlert = details => {
+    const template = document.getElementById("alert-template");
+    const alert = template.cloneNode(true);
+    alert.classList.add(details.type);
+    alert.querySelector("h3").innerHTML = details.title;
+    alert.querySelector("p").innerHTML = details.message;
+    alert.querySelector("a").addEventListener("click", () => closeAlert(alert));
+    alert.id = null;
+    alert.classList.remove("hidden");
+    document.querySelector("#alerts").appendChild(alert);
+}
+
+const closeAlert = alert => {
+    console.log(alert);
+    alert.remove();
 }

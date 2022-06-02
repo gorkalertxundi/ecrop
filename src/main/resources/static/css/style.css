@@ -140,7 +140,7 @@ aside .menu-item-wrap:hover .menu-text {
 .profile {
     z-index: 100;
     position: absolute;
-    top: 2em;
+    top: 1em;
     right: 2em;
     border-radius: 50%;
     overflow: hidden;
@@ -254,10 +254,6 @@ aside:not(.toggled) .menu-item-wrap:hover .menu-icon::after {
     opacity: 1;
 }
 
-.hidden {
-    display: none;
-}
-
 .pagination {
     display: flex;
     align-items: center;
@@ -278,4 +274,38 @@ aside:not(.toggled) .menu-item-wrap:hover .menu-icon::after {
 
 .pagination .page.active {
     background: var(--highlight-secondary);
+}
+
+#alerts {
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    top: 0;
+    right: 8em;
+}
+
+.alert {
+    display: flex;
+    justify-content: space-between;
+    width: 20em;
+    margin: 1em auto;
+    padding: 2em;
+    border-radius: 8px;
+    box-shadow: 0 0 15px 5px #ccc;
+    background-color: var(--bg-light);
+}
+
+.alert .close {
+    display: grid;
+    place-items: center;
+    width: 2em;
+    height: 2em;
+    opacity: 0.5;
+    border: 1px solid var(--highlight-main);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
 }

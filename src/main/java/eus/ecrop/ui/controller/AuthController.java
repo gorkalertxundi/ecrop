@@ -1,14 +1,14 @@
 package eus.ecrop.ui.controller;
 
-import java.util.Map;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /*
 * @author Mikel Orobengoa
@@ -24,7 +24,18 @@ public class AuthController {
 
     @GetMapping("/cookies")
     public String setCookies(HttpServletRequest request, HttpServletResponse response,
-            @RequestHeader Map<String, String> headers) {
+            @RequestParam("access_token") String accessToken, @RequestParam("refresh_token") String refreshToken) {
+
+        Date accessTokenExpiration = new Date(System.currentTimeMillis() + 1000 * 60 * 60);
+
+        response.addHeader("Set-Cookie",
+                "access_token=" + accessToken + "; expires=" + accessTokenExpiration + "; Path=/;");
+
+        Date refreshTokenExpiration = new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24);
+
+        response.addHeader("Set-Cookie",
+                "refresh_token=" + refreshToken + "; expires=" + refreshTokenExpiration + "; Path=/;");
+
         return "forward:/";
     }
 

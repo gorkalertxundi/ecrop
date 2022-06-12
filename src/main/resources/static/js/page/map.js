@@ -1,6 +1,18 @@
 var map;
 var overlay;
 
+var filter = '';
+var filterForm = document.querySelector('#map-filter form');
+filterForm.addEventListener('change', () => { updateFilter(); toggleOverlay(); toggleOverlay(); });
+
+function updateFilter() {
+    const formData = new FormData(filterForm);
+    filter = Object.keys(Object.fromEntries(formData.entries())).join(',');
+    console.log(filter);
+}
+
+updateFilter();
+
 function initMap() {
 
     const args = {
@@ -26,7 +38,7 @@ function initMap() {
             let lat = bounds.ne.lat + (bounds.ne.lat - bounds.sw.lat) / 2;
             let lng = bounds.ne.lng + (bounds.ne.lng - bounds.sw.lng) / 2;
 
-            return `https://node.ecrop.ddns.net/process-image?api-key=uwu&center=${lat},${lng}`;
+            return `https://node.ecrop.ddns.net/process-image?api-key=uwu&center=${lat},${lng}&filter=${filter}`;
         },
     });
 

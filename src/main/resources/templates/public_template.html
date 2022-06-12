@@ -93,7 +93,7 @@
                                         d="M15,19L9,16.89V5L15,7.11M20.5,3C20.44,3 20.39,3 20.34,3L15,5.1L9,3L3.36,4.9C3.15,4.97 3,5.15 3,5.38V20.5A0.5,0.5 0 0,0 3.5,21C3.55,21 3.61,21 3.66,20.97L9,18.9L15,21L20.64,19.1C20.85,19 21,18.85 21,18.62V3.5A0.5,0.5 0 0,0 20.5,3Z" />
                                 </svg></div><span class="menu-text">Map</span>
                         </a></li>
-                    <li class="menu-item"><a class="menu-item-wrap item-has-text" data-view="land-zone"
+                    <li class="menu-item hidden" data-privileges="PRIVILEGE_LAND_ZONE"><a class="menu-item-wrap item-has-text" data-view="land-zone"
                             href="/land-zone" th:href="@{/land-zone}">
                             <div class="menu-icon" data-tip="Land zone"><svg xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24"
@@ -102,7 +102,7 @@
                                         d="M2,22V20C2,20 7,18 12,18C17,18 22,20 22,20V22H2M11.3,9.1C10.1,5.2 4,6.1 4,6.1C4,6.1 4.2,13.9 9.9,12.7C9.5,9.8 8,9 8,9C10.8,9 11,12.4 11,12.4V17C11.3,17 11.7,17 12,17C12.3,17 12.7,17 13,17V12.8C13,12.8 13,8.9 16,7.9C16,7.9 14,10.9 14,12.9C21,13.6 21,4 21,4C21,4 12.1,3 11.3,9.1Z" />
                                 </svg></div><span class="menu-text">Land zone</span>
                         </a></li>
-                    <li class="menu-item"><a class="menu-item-wrap item-has-text" data-view="subscriptions"
+                    <!-- <li class="menu-item hidden" data-privileges="PRIVILEGE_LOGGED"><a class="menu-item-wrap item-has-text" data-view="subscriptions"
                             href="/subscription" th:href="@{/subscription}">
                             <div class="menu-icon" data-tip="Subscriptions"><svg xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24"
@@ -111,7 +111,7 @@
                                         d="M7,15H9C9,16.08 10.37,17 12,17C13.63,17 15,16.08 15,15C15,13.9 13.96,13.5 11.76,12.97C9.64,12.44 7,11.78 7,9C7,7.21 8.47,5.69 10.5,5.18V3H13.5V5.18C15.53,5.69 17,7.21 17,9H15C15,7.92 13.63,7 12,7C10.37,7 9,7.92 9,9C9,10.1 10.04,10.5 12.24,11.03C14.36,11.56 17,12.22 17,15C17,16.79 15.53,18.31 13.5,18.82V21H10.5V18.82C8.47,18.31 7,16.79 7,15Z" />
                                 </svg></div><span class="menu-text">Subscriptions</span>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
                 <div class="menu-bottom">
                     <a class="menu-item-wrap logout item-has-text" href="/logout" th:href="@{/logout}">

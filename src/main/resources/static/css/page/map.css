@@ -1,3 +1,74 @@
 .map-frame {
     width: 100%;
 }
+
+#map-filter {
+    z-index: 100;
+    position: absolute;
+    bottom: 1em;
+    left: 1em;
+    background: var(--bg-light);
+    border: 2px solid var(--highlight-main);
+    border-radius: 8px;
+    padding: 1em;
+}
+
+#map-filter form fieldset {
+    display: grid;
+    border: none;
+    padding: 0;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75em;
+}
+
+#map-filter form label {
+    display: flex;
+    align-items: center;
+    gap: 0.2em;
+}
+
+#map-filter input[type="checkbox"] {
+    display: inline-flex;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--highlight-secondary);
+    border-radius: 4px;
+    color: #000;
+    cursor: pointer;
+}
+
+#map-filter input[type="checkbox"]:checked::before {
+    content: '\2713';
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    display: grid;
+    place-content: center;
+    font-weight: bold;
+    font-size: 1.25em;
+}
+
+
+#map-filter input[type="checkbox"][name="urban"] {
+    background: #0FF;
+}
+
+#map-filter input[type="checkbox"][name="agriculture"] {
+    background: #FF0;
+}
+#map-filter input[type="checkbox"][name="rangeland"] {
+    background: #F0F;
+}
+
+#map-filter input[type="checkbox"][name="forest"] {
+    background: #0F0;
+}
+#map-filter input[type="checkbox"][name="water"] {
+    background: #00F;
+    color: white;
+}
+
+#map-filter input[type="checkbox"][name="barren"] {
+    background: #FFF;
+}

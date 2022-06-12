@@ -5,7 +5,7 @@ function openLandEditor(e) {
     let id = null;
     if (e) {
         e.preventDefault();
-        id = e.target.parentElement.dataset.landId;
+        id = e.target.parentElement.parentElement.dataset.landId;
     }
     showLandEditor();
     if (id) loadLand(id);
@@ -13,7 +13,6 @@ function openLandEditor(e) {
 }
 
 function createEditor(land) {
-    console.log(land);
     document.querySelector('#land-editor .land-editor-wrap').innerHTML = '';
 
     const editor = document.createElement('div');
@@ -40,7 +39,7 @@ function createEditorTitle(land) {
 function createEditorCloseButton() {
     const button = document.createElement('a');
     button.classList.add('close-editor');
-    button.innerHTML = 'Close';
+    button.innerHTML = '<svg viewPort="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg"><line x1="1" y1="11" x2="11" y2="1"/><line x1="1" y1="1" x2="11" y2="11"/></svg>';
     button.addEventListener('click', closeEditor);
     return button;
 }
@@ -80,7 +79,7 @@ function createFormHeader(land) {
     header.appendChild(nameField);
 
     const submit = document.createElement('input');
-    submit.classList.add('form-submit');
+    submit.classList.add('form-submit', 'btn');
     submit.setAttribute('type', 'submit');
     submit.setAttribute('value', land ? 'Update' : 'Add new land');
     header.appendChild(submit);
@@ -95,15 +94,15 @@ function createFormBody(land) {
     body.appendChild(createFormField('nitrogen', 'Nitrogen', 'number', land ? land.nitrogen : null));
     body.appendChild(createFormField('phosphorus', 'Phosphorus', 'number', land ? land.phosphorus : null));
     body.appendChild(createFormField('potassium', 'Potassium', 'number', land ? land.potassium : null));
-    body.appendChild(createFormField('ph', 'pH', 'number', land ? land.ph : null));
-    body.appendChild(createFormField('temperature', 'Temperature', 'number', land ? land.temperature : null));
-    body.appendChild(createFormField('rainfall', 'Rainfall', 'number', land ? land.rainfall : null));
-    body.appendChild(createFormField('humidity', 'Humidity', 'number', land ? land.humidity : null));
+    body.appendChild(createFormField('ph', 'pH', 'number', land ? land.ph : null, true));
+    body.appendChild(createFormField('temperature', 'Temperature', 'number', land ? land.temperature : null, true));
+    body.appendChild(createFormField('rainfall', 'Rainfall', 'number', land ? land.rainfall : null, true));
+    body.appendChild(createFormField('humidity', 'Humidity', 'number', land ? land.humidity : null, true));
 
     return body;
 }
 
-function createFormField(name, label, type, value = null) {
+function createFormField(name, label, type, value = null, float = false) {
     const field = document.createElement('div');
     field.classList.add('form-field');
 
@@ -116,6 +115,7 @@ function createFormField(name, label, type, value = null) {
     input.setAttribute('name', name);
     input.setAttribute('type', type);
     input.setAttribute('placeholder', label);
+    if (float) input.setAttribute('step', 0.01);
     if (value) input.setAttribute('value', value);
     field.appendChild(input);
 
@@ -140,6 +140,7 @@ async function submitLand(e) {
     e.preventDefault();
     const form = e.target;
     const data = new FormData(form);
+    hideFieldErrors();
     if (form.dataset.method === 'PUT')
         await apiRequest(form.dataset.url, form.dataset.method, landEditedSuccessfully, landEditedError, JSON.stringify(Object.fromEntries(data)));
     else await apiRequest(form.dataset.url, form.dataset.method, landCreatedSuccessfully, landCreatedError, JSON.stringify(Object.fromEntries(data)));
@@ -151,8 +152,9 @@ function landEditedSuccessfully() {
     createAlert({ type: 'success', title: 'Land edited successfully!', message: 'The land has been edited successfully' });
 }
 
-function landEditedError() {
-    createAlert({ type: 'success', title: 'Could not update land!', message: 'There was an error updating the land information.' });
+function landEditedError(errors) {
+    showFieldErrors(errors);
+    createAlert({ type: 'error', title: 'Could not update land!', message: 'There was an error updating the land information.' });
 }
 
 function landCreatedSuccessfully() {
@@ -161,8 +163,32 @@ function landCreatedSuccessfully() {
     createAlert({ type: 'success', title: 'Land created successfully!', message: 'The land has been created successfully' });
 }
 
-function landCreatedError() {
-    createAlert({ type: 'success', title: 'Could not create land!', message: 'There was an error creating the land.' });
+function landCreatedError(errors) {
+    showFieldErrors(errors);
+    createAlert({ type: 'error', title: 'Could not create land!', message: 'Make sure all the required fields are filled in.' });
+}
+
+function showFieldErrors(errors) {
+    errors.forEach(error => {
+        const input = document.querySelector(`[name="${error.field}"]`);
+        input.classList.add('error');
+        input.parentElement.appendChild(createErrorLabel(error.defaultMessage));
+    });
+}
+
+function hideFieldErrors() {
+    document.querySelectorAll('.form-input.error').forEach(input => {
+        input.classList.remove('error');
+        const errorLabel = input.parentElement.querySelector('.field-error');
+        if (errorLabel) errorLabel.remove();
+    });
+}
+
+function createErrorLabel(message) {
+    const label = document.createElement('span');
+    label.classList.add('field-error');
+    label.innerHTML = message;
+    return label;
 }
 
 function closeEditor(e) {

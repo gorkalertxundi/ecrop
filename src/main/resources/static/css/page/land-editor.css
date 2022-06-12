@@ -46,9 +46,32 @@
 }
 
 #land-editor .editor-container .header .close-editor {
-    color: red;
+    border-radius: 50%;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--alert-danger);
+    padding: 0.5em;
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
+
+#land-editor .editor-container .header .close-editor:hover,
+#land-editor .editor-container .header .close-editor:focus {
+    transform: rotate(90deg);
+    background-color: var(--highlight-secondary);
+}
+
+#land-editor .editor-container .header .close-editor svg {
+    width: 12px;
+    height: 12px;
+    stroke: #fff;
+    stroke-width: 2px;
+    transform: scale(1.1);
+}
+
 
 #land-editor .form .form-upper {
     display: flex;
@@ -67,6 +90,15 @@
     display: flex;
     flex-direction: column;
     gap: 0.3em;
+}
+
+#land-editor .form .form-input.error {
+    border-color: var(--alert-danger);
+}
+
+#land-editor .form .field-error {
+    color: var(--alert-danger);
+    font-size: 0.8em;
 }
 
 #land-editor .form input[type="text"],

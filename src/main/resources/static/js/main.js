@@ -92,7 +92,7 @@ const makeRequest = async (path, method, data) => {
     const refreshToken = getCookie('refresh_token');
     if ((!authToken || !authToken.length) && (!refreshToken || !refreshToken.length)) { logout(); }
 
-    const req = await fetch(`${API_URL}${path}`, {
+    return await fetch(`${API_URL}${path}`, {
         mode: 'cors',
         method: method,
         headers: {
@@ -101,8 +101,6 @@ const makeRequest = async (path, method, data) => {
         },
         body: data
     });
-
-    return req;
 }
 
 const retryRequest = async (path, method, data, successCallback, errorCallback) => {

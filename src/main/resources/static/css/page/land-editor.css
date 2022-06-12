@@ -46,8 +46,6 @@
 }
 
 #land-editor .editor-container .header .close-editor {
-    border-radius: 50%;
-    overflow: hidden;
     display: grid;
     place-items: center;
     border-radius: 50%;

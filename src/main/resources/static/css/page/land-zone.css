@@ -2,18 +2,27 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    position: inherit;
+}
+
+.land-zone > .header {
+    display: flex;
+    align-items: center;
+    padding-top: 1.5em;
+    margin: 0 2em;
 }
 
 #land-list {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(min(600px, 100%), 1fr));
+    grid-template-rows: repeat(2, 1fr);
     margin: 2em;
     gap: 2em;
     box-sizing: border-box;
     flex-grow: 1;
 }
 
-#land-list .land {
+.land {
     display: flex;
     flex-direction: column;
     border-radius: 8px;
@@ -22,29 +31,79 @@
     overflow: hidden;
 }
 
-#land-list .land .title {
+.land .title {
     padding: 1em;
     background-color: var(--highlight-main);
 }
 
-#land-list .land .data {
-    display: flex;
-    margin: 1em 2em;
+.land .title h2 {
+    margin: 0;
+    color: #fff;
+    text-align: center;
 }
 
-#land-list .land .data .nutrients {
+.land .data {
+    display: flex;
+    margin: 1em;
+    gap: 2em;
+    height: 100%;
+}
+
+.land .data .data-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
     background-color: #fff;
     border-radius: 8px;
     overflow: hidden;
     padding: 1em;
 }
 
-#land-list .land .data .nutrients ul {
+.land .data .data-container h3 {
+    margin-top: 0;
+    color: var(--highlight-secondary);
+    text-align: center;
+}
+
+.land .data .nutrients ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-#land-list .land .data .nutrients ul li .tag {
+.land .data .nutrients ul li {
+    display: flex;
+    justify-content: space-between;
+}
+
+.land .data .nutrients ul li .tag {
     font-weight: bold;
+}
+
+.land .action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+    margin: 0 1em 1em;
+    justify-content: space-between;
+}
+
+.land .action-buttons .delete-land {
+    background: var(--alert-danger);
+}
+
+.land .action-buttons .delete-land:hover {
+    background: var(--highlight-secondary);
+}
+
+.land .action-buttons .download-land {
+    margin-left: auto;
+}
+
+.land .recommendation span {
+    flex-grow: 1;
+    display: grid;
+    place-content: center;
+    font-size: 3em;
+    text-transform: capitalize;
 }

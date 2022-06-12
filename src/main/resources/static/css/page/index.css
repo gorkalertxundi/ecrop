@@ -3,6 +3,7 @@
     height: 100%;
     display: grid;
     place-content: center;
+    gap: 4em;
 }
 
 .logo-big svg {

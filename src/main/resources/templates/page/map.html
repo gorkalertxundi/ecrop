@@ -13,6 +13,36 @@
 <body>
     <div id="viewport" layout:fragment="content">
         <div class="map-frame"></div>
+        <div id="map-filter">
+            <form>
+                <fieldset>
+                    <label for="urban">
+                        <input type="checkbox" name="urban" id="urban" data-color="#0FF" checked>
+                        Urban</label>
+
+                    <label for="agriculture">
+                        <input type="checkbox" name="agriculture" id="agriculture" data-color="#FF0" checked>
+                        Agriculture</label>
+
+                    <label for="rangeland">
+                        <input type="checkbox" name="rangeland" id="rangeland" data-color="#F0F" checked>
+                        Rangeland</label>
+
+                    <label for="forest">
+                        <input type="checkbox" name="forest" id="forest" data-color="#0F0" checked>
+                        Forest</label>
+
+                    <label for="water">
+                        <input type="checkbox" name="water" id="water" data-color="#00F" checked>
+                        Water</label>
+
+                    <label for="barren">
+                        <input type="checkbox" name="barren" id="barren" data-color="#FFF" checked>
+                        Barren</label>
+
+                </fieldset>
+            </form>
+        </div>
     </div>
 </body>
 

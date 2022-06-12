@@ -6,7 +6,7 @@ body {
     --highlight-main: #95b83c;
     --highlight-secondary: #7d5a42;
     --bg-light: #f2f0ec;
-    
+    --alert-danger: #ef5045;
 }
 
 a {
@@ -14,11 +14,36 @@ a {
     font-weight: 500;
 }
 
+input[type="submit"],
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    background-color: var(--highlight-main);
+    border-radius: 8px;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    width: fit-content;
+    color: #fff;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+}
+
+input[type="submit"]:hover,
+.btn:hover {
+    background-color: var(--highlight-secondary);
+}
+
 .container,
 .aside-wrap,
 #viewport {
     display: flex;
     height: 100%;
+}
+
+#viewport {
+    overflow: auto;
 }
 
 main {
@@ -117,16 +142,17 @@ aside .menu-item-wrap:hover .menu-text {
 .profile {
     z-index: 100;
     position: absolute;
-    top: 2em;
+    top: 1em;
     right: 2em;
     border-radius: 50%;
     overflow: hidden;
     background-color: var(--bg-light);
-    border: 2px solid var(--highlight-secondary);
+    border: 4px solid var(--highlight-secondary);
 }
 
 .profile.logged {
     border-color: var(--highlight-main);
+    background-color: var(--highlight-main);
 }
 
 .profile .profile-button {
@@ -195,7 +221,7 @@ aside:not(.toggled) .menu-item-wrap .menu-icon::before {
     min-width: 120px;
     text-align: center;
     opacity: 0;
-    visibility: hidden;
+    display: none;
     transition: all 0.3s ease-in-out;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
     font-family: sans-serif;
@@ -216,7 +242,7 @@ aside:not(.toggled) .menu-item-wrap .menu-icon::after {
     content: "";
     position: absolute;
     opacity: 0;
-    visibility: hidden;
+    display: none;
     transition: all 0.3s ease-in-out;
     border-width: 8px 8px 8px 0;
     border-color: transparent rgba(10, 20, 30, 0.85) transparent transparent;
@@ -227,8 +253,95 @@ aside:not(.toggled) .menu-item-wrap .menu-icon::after {
 
 aside:not(.toggled) .menu-item-wrap:hover .menu-icon::before,
 aside:not(.toggled) .menu-item-wrap:hover .menu-icon::after {
-    visibility: visible;
+    display: block;
     opacity: 1;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    margin-bottom: 2em;
+}
+
+.pagination .page {
+    display: grid;
+    place-items: center;
+    padding: 1em;
+    background: var(--highlight-main);
+    color: #fff;
+    border-radius: 8px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.pagination .page.active {
+    background: var(--highlight-secondary);
+}
+
+#alerts {
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    top: 0;
+    right: 8em;
+    z-index: 100;
+}
+
+.alert {
+    display: flex;
+    justify-content: space-between;
+    width: 20em;
+    margin: 1em auto;
+    padding: 1.5em;
+    border-radius: 8px;
+    box-shadow: 0 0 15px 5px #ccc;
+    background-color: var(--bg-light);
+    color: #fff;
+    align-items: center;
+    gap: 1em;
+}
+
+.alert .close {
+    display: grid;
+    place-items: center;
+    opacity: 0.5;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.alert h3,
+.alert p {
+    margin: 0;
+}
+
+.alert h3 {
+    margin-bottom: 0.5em;
+}
+
+.alert.success {
+    background-color: green;
+}
+
+.alert.error {
+    background: var(--alert-danger);
+}
+
+.login-form {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+}
+
+.login-form .google {
+    display: flex;
+    gap: 1em;
+    padding: 1em 2em;
+    color: darkgray;
+    border-radius: 4px;
+    box-shadow: 0px 2px 6px 0px #0005;
 }
 
 .hidden {

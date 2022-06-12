@@ -1,10 +1,25 @@
 var map;
 var overlay;
 
+var filter = '';
+var filterForm = document.querySelector('#map-filter form');
+filterForm.addEventListener('change', () => { updateFilter(); toggleOverlay(); toggleOverlay(); });
+
+function updateFilter() {
+    const formData = new FormData(filterForm);
+    filter = Object.keys(Object.fromEntries(formData.entries())).join(',');
+    console.log(filter);
+}
+
+updateFilter();
+
 function initMap() {
 
     const args = {
-        center: { lat: 43.062840, lng: -2.493579 },
+        // center: { lat: 43.062840, lng: -2.493579 }, //Mondra
+        // center: { lat: 43.306613, lng: -2.386335 }, //Mutr
+        // center: { lat: 43.3067104, lng: -2.68408302 }, //Gern
+        center: { lat: 40.7659477020942, lng: -111.96443036083478 }, //Salt City
         zoom: 15,
         zoomControl: false,
         scrollwheel: false,
@@ -23,7 +38,7 @@ function initMap() {
             let lat = bounds.ne.lat + (bounds.ne.lat - bounds.sw.lat) / 2;
             let lng = bounds.ne.lng + (bounds.ne.lng - bounds.sw.lng) / 2;
 
-            return `https://node.ecrop.ddns.net/process-image?api-key=uwu&center=${lat},${lng}`;
+            return `https://node.ecrop.ddns.net/process-image?api-key=uwu&center=${lat},${lng}&filter=${filter}`;
         },
     });
 

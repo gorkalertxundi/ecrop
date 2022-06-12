@@ -16,7 +16,6 @@ const addSwitchListeners = () => {
             switchViewport(i.dataset.view);
         });
     });
-
 }
 
 const switchViewport = async view => {
@@ -43,7 +42,7 @@ const updateUrl = view => {
 }
 
 const updateTitle = doc => {
-    document.title = `eCrop - ${doc.querySelector('title').innerHTML}`;
+    document.title = `${doc.querySelector('title').innerHTML} - eCrop`;
 
 }
 
@@ -78,21 +77,65 @@ const clearViewLoading = () => {
     document.querySelector('.view-loader').classList.add('hidden');
 }
 
-const apiRequest = async (path, method, successCallback, errorCallback) => {
-    const req = await fetch(`${API_URL}${path}`, {
+const apiRequest = async (path, method, successCallback, errorCallback, data) => {
+    const req = await makeRequest(path, method, data);
+    if (req.status == 401) {
+        await getRefreshedToken();
+        await retryRequest(path, method, data, successCallback, errorCallback);
+    }
+    apiCallback(req, successCallback, errorCallback);
+}
+
+const makeRequest = async (path, method, data) => {
+    console.log(`request path: ${API_URL}${path}`);
+    const authToken = getCookie('access_token');
+    const refreshToken = getCookie('refresh_token');
+    if ((!authToken || !authToken.length) && (!refreshToken || !refreshToken.length)) { logout(); }
+
+    return await fetch(`${API_URL}${path}`, {
         mode: 'cors',
         method: method,
         headers: {
             'Content-Type': 'application/json',
-            authorization: `Bearer ${getCookie('access_token')}`,
-        }
+            authorization: `Bearer ${authToken}`,
+        },
+        body: data
     });
-    if (req.status == 401) {
-        refreshToken();
-        console.error('refreshed token, falta refetchear');
-    }
+}
+
+const retryRequest = async (path, method, data, successCallback, errorCallback) => {
+    const req = await makeRequest(path, method, data);
+    apiCallback(req, successCallback, errorCallback);
+}
+
+const apiCallback = async (req, successCallback, errorCallback) => {
+    const contentType = req.headers.get('Content-Type');
     if (req.status >= 200 && req.status < 300) {
-        if (typeof successCallback === 'function') successCallback(await req.json());
+        if (typeof successCallback === 'function')
+            if (contentType && contentType.indexOf('application/json') !== -1)
+                successCallback(await req.json());
+            else successCallback(await req.text());
     }
-    else if (typeof errorCallback === 'function') errorCallback(await req.json());
+    else if (typeof errorCallback === 'function')
+        if (contentType && contentType.indexOf('application/json') !== -1)
+            errorCallback(await req.json());
+        else errorCallback(await req.text());
+}
+
+const createAlert = details => {
+    const template = document.getElementById("alert-template");
+    const alert = template.cloneNode(true);
+    alert.classList.add(details.type);
+    alert.querySelector("h3").innerHTML = details.title;
+    alert.querySelector("p").innerHTML = details.message;
+    alert.querySelector("a").addEventListener("click", () => closeAlert(alert));
+    alert.id = null;
+    alert.classList.remove("hidden");
+    document.querySelector("#alerts").appendChild(alert);
+    if (details.type == "success") setTimeout(() => closeAlert(alert), 5000);
+}
+
+const closeAlert = alert => {
+    console.log(alert);
+    alert.remove();
 }

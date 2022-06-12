@@ -5,13 +5,10 @@
     position: inherit;
 }
 
-.land-zone .header {
+.land-zone > .header {
     display: flex;
     align-items: center;
     padding-top: 1.5em;
-}
-
-.land-zone .header {
     margin: 0 2em;
 }
 
@@ -64,7 +61,8 @@
 
 .land .data .data-container h3 {
     margin-top: 0;
-    text-decoration: underline;
+    color: var(--highlight-secondary);
+    text-align: center;
 }
 
 .land .data .nutrients ul {
@@ -91,5 +89,21 @@
 }
 
 .land .action-buttons .delete-land {
-    background: red;
+    background: var(--alert-danger);
+}
+
+.land .action-buttons .delete-land:hover {
+    background: var(--highlight-secondary);
+}
+
+.land .action-buttons .download-land {
+    margin-left: auto;
+}
+
+.land .recommendation span {
+    flex-grow: 1;
+    display: grid;
+    place-content: center;
+    font-size: 3em;
+    text-transform: capitalize;
 }

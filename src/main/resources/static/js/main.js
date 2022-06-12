@@ -16,7 +16,6 @@ const addSwitchListeners = () => {
             switchViewport(i.dataset.view);
         });
     });
-
 }
 
 const switchViewport = async view => {
@@ -79,21 +78,39 @@ const clearViewLoading = () => {
 }
 
 const apiRequest = async (path, method, successCallback, errorCallback, data) => {
+    const req = await makeRequest(path, method, data);
+    if (req.status == 401) {
+        await getRefreshedToken();
+        await retryRequest(path, method, data, successCallback, errorCallback);
+    }
+    apiCallback(req, successCallback, errorCallback);
+}
+
+const makeRequest = async (path, method, data) => {
     console.log(`request path: ${API_URL}${path}`);
+    const authToken = getCookie('access_token');
+    const refreshToken = getCookie('refresh_token');
+    if ((!authToken || !authToken.length) && (!refreshToken || !refreshToken.length)) { logout(); }
+
     const req = await fetch(`${API_URL}${path}`, {
         mode: 'cors',
         method: method,
         headers: {
             'Content-Type': 'application/json',
-            authorization: `Bearer ${getCookie('access_token')}`,
+            authorization: `Bearer ${authToken}`,
         },
         body: data
     });
-    if (req.status == 401) {
-        refreshToken();
-        console.error('refreshed token, falta refetchear');
-    }
 
+    return req;
+}
+
+const retryRequest = async (path, method, data, successCallback, errorCallback) => {
+    const req = await makeRequest(path, method, data);
+    apiCallback(req, successCallback, errorCallback);
+}
+
+const apiCallback = async (req, successCallback, errorCallback) => {
     const contentType = req.headers.get('Content-Type');
     if (req.status >= 200 && req.status < 300) {
         if (typeof successCallback === 'function')
@@ -117,6 +134,7 @@ const createAlert = details => {
     alert.id = null;
     alert.classList.remove("hidden");
     document.querySelector("#alerts").appendChild(alert);
+    if (details.type == "success") setTimeout(() => closeAlert(alert), 5000);
 }
 
 const closeAlert = alert => {

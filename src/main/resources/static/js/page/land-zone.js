@@ -23,7 +23,7 @@ function createLandItem(land) {
 
     landElement.appendChild(createTitleBar(land));
     landElement.appendChild(createData(land));
-    landElement.appendChild(createActionButtons());
+    landElement.appendChild(createActionButtons(land));
 
 
     return landElement;
@@ -52,22 +52,23 @@ function createData(land) {
     nutrients.appendChild(nutrientsTitle);
     nutrients.appendChild(createNutrientList(land));
 
-    const recommendations = document.createElement('div');
-    recommendations.classList.add('recommendations', 'data-container');
-    data.appendChild(recommendations);
+    const recommendation = document.createElement('div');
+    recommendation.classList.add('recommendation', 'data-container');
+    data.appendChild(recommendation);
 
-    const recommendationsTitle = document.createElement('h3');
-    recommendationsTitle.innerHTML = 'Recommendations';
-    recommendations.appendChild(recommendationsTitle);
-    recommendations.appendChild(createRecommendationList(land));
+    const recommendationTitle = document.createElement('h3');
+    recommendationTitle.innerHTML = 'Recommended Crop';
+    recommendation.appendChild(recommendationTitle);
+    recommendation.appendChild(createRecommendation(land));
 
     return data;
 }
 
-function createActionButtons() {
+function createActionButtons(land) {
     const buttons = document.createElement('div');
     buttons.classList.add('action-buttons');
     buttons.appendChild(createDeleteButton());
+    buttons.appendChild(createDownloadButton(land));
     buttons.appendChild(createUpdateButton());
     return buttons;
 }
@@ -77,6 +78,23 @@ function createUpdateButton() {
     button.classList.add('edit-land', 'btn');
     button.innerHTML = 'Update nutrients';
     button.addEventListener('click', openLandEditor);
+    return button;
+}
+
+function createDownloadButton(land) {
+    const button = document.createElement('a');
+    button.classList.add('download-land', 'btn');
+    button.innerHTML = 'Download';
+    delete land.id;
+    button.addEventListener('click', () => {
+        console.log(land);
+        const a = document.createElement("a");
+        const file = new Blob([JSON.stringify(land)], { type: 'text/plain' });
+        a.href = URL.createObjectURL(file);
+        a.download = `${land.name}.json`;
+        a.click();
+    });
+
     return button;
 }
 
@@ -112,27 +130,19 @@ function createNutrient(title, value) {
     return nutrient;
 }
 
-function createRecommendationList(land) {
-    const list = document.createElement('ul');
-    return list;
-}
-
-function createRecommendation(title, value) {
-    const recommendation = document.createElement('li');
-    const recommendationTitle = document.createElement('span');
-    recommendationTitle.innerHTML = title;
-    recommendationTitle.classList.add('tag');
-    recommendation.appendChild(recommendationTitle);
-    recommendation.innerHTML += value ? ` ${value}` : '-';
+function createRecommendation(land) {
+    const recommendation = document.createElement('span');
+    recommendation.classList.add('recommendation');
+    recommendation.innerHTML = `${land.recommendation ? land.recommendation : '-'}`;
     return recommendation;
 }
 
-function deleteLand(e) {
+async function deleteLand(e) {
     if (!e) return;
     e.preventDefault();
 
     const id = e.target.parentElement.parentElement.dataset.landId;
-    apiRequest(`land/delete?id=${id}`, 'DELETE', deleteSuccessfull, deleteError);
+    await apiRequest(`land/delete?id=${id}`, 'DELETE', deleteSuccessfull, deleteError);
 }
 
 function showPagination(response) {
@@ -179,9 +189,9 @@ function showPagination(response) {
 
 function deleteSuccessfull(response) {
     loadLands(current_page);
-    createAlert({type: 'success', title: 'Land deleted successfully!', message: 'The land has been deleted'});
+    createAlert({ type: 'success', title: 'Land deleted successfully!', message: 'The land has been deleted' });
 }
 
 function deleteError(response) {
-    createAlert({type: 'error', title: 'Error deleting land!', message: 'There was an error deleting the land'});
+    createAlert({ type: 'error', title: 'Error deleting land!', message: 'There was an error deleting the land' });
 }
